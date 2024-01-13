@@ -32,6 +32,7 @@ import com.brian.socialmedia.util.Constants;
 @Transactional
 public class AccountServiceImpl implements AccountService {
 	
+	// This will make circular references
 //	@Autowired
 //	AccountService accountService;
 
@@ -61,7 +62,7 @@ public class AccountServiceImpl implements AccountService {
 		appUser.setUsername(username);
 		appUser.setEmail(email);
 		Set<UserRole> userRoles = new HashSet<>();
-		//userRoles.add(new UserRole(appUser, accountService.findUserRoleByName("USER")));
+		userRoles.add(new UserRole(appUser, findUserRoleByName("USER")));
 		appUser.setUserRoles(userRoles);
 		appUserRepo.save(appUser);
 		byte[] bytes;
